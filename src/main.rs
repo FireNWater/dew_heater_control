@@ -34,7 +34,7 @@ fn blink_once (dh_pin: &mut OutputPin, percent: u64){
     println!("pin on, {} percent power.", percent);
     dh_pin.set_high();
     //println!("Blinking LED {:?} on a {}.", dh_pin, DeviceInfo::new()?.model());
-    let dellay = 100000 / percent;
+    let dellay = 100000 / percent;   //TODO   Figure out how to do division on a u64
     println!("Delay time in milliseconds: {} ", dellay);
     delay(dellay);
     println!("pin off, {} percent power.", percent);
