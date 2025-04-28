@@ -15,7 +15,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     
     let mut count = 0;
     loop {
-        blink_once(&mut pin1, 50);
+        blink_once(&mut pin1, 60);
         count += 1;
         if count > 5 {
              break }
@@ -30,14 +30,15 @@ fn delay(millisec: u64) {
 }
 
 fn blink_once (dh_pin: &mut OutputPin, percent: u64){
-    //let mut pin = Gpio::new()?.get(dh_pin)?.into_output();
-    println!("pin on, {} percent power.", percent);
+    let pause = percent * 10;                           //Convert % to millis
+
     dh_pin.set_high();
-    //println!("Blinking LED {:?} on a {}.", dh_pin, DeviceInfo::new()?.model());
-    let dellay = 100000 / percent;   //TODO   Figure out how to do division on a u64
-    println!("Delay time in milliseconds: {} ", dellay);
-    delay(dellay);
-    println!("pin off, {} percent power.", percent);
+
+        println!("On time in milliseconds: {} ", pause);
+    delay(pause);
+
     dh_pin.set_low();
-    delay(dellay);
+        println!("Off time in milliseconds: {} ", 1000 - pause);
+
+    delay(1000 - pause);
 }
